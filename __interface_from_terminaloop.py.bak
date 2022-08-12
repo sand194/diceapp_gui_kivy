@@ -87,7 +87,7 @@ class Interface: # app interface class
             # generate new file name each time so history files don't overwrite
             f_name = self._now.strftime("%m-%d-%Y-%H-%M-%S")
 
-            with open(r'roll_history_files/history_file_' + f_name + '.txt', 'w') as f_path:
+            with open(r'D:/python_programs/diceapp_oop/roll_history_files/history_file_' + f_name + '.txt', 'w') as f_path:
                 f_path.write('\n'.join(str(item) for item in self._memory))
 
             print('saved to history_file.txt')
