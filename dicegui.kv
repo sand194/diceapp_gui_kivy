@@ -1,0 +1,91 @@
+#:import Factory kivy.factory.Factory
+
+<SaveStatePopup@Popup>
+    auto_dismiss: True # False # true = click anywhere beside the dialog window to close, false needs a button to close
+    title: "File saved"
+    size_hint: 0.6, 0.15
+    pos: 30, 330
+
+    Button:
+        text: "Open folder"
+        font_size: 15
+        size_hint: 0.2, 0.10
+        pos: 30, 340
+        on_press: app.root.open_folder()
+
+
+<Wyglad>
+
+    FloatLayout:
+        #cols: 1
+        orientation: 'vertical'
+        size: root.width, root.height
+
+# =========== top_grid layout (wewnetrzny) ================
+
+        FloatLayout:
+            #cols: 2
+
+            Label: # dice amount text input
+                text: "Dice amount"
+                size_hint: 0.3, 0.05
+                pos: 30, 630
+            TextInput:
+                multiline: False
+                id: d_amount_kv
+                size_hint: 0.3, 0.05
+                pos: 30, 580
+
+            Label: # dice sides text input
+                text: "Dice Sides"
+                size_hint: 0.3, 0.05
+                pos: 220, 630
+            TextInput:
+                multiline: False
+                id: d_sides_kv
+                size_hint: 0.3, 0.05
+                pos: 220, 580
+
+            Label: # modificator text input
+                text: "Modificator +/-"
+                size_hint: 0.3, 0.05
+                pos: 125, 540
+            TextInput:
+                multiline: False
+                id: d_mod_kv
+                size_hint: 0.3, 0.05
+                pos: 125, 490
+
+# ==================================================
+        # first grid widgets
+
+        Button: # ROLL BUTTON
+            text: "Roll"
+            font_size: 32
+            on_press: root.roll() # bind roll button = po wcisnieciu guzika wyswietli wyniki rzutu kostka
+            size_hint: 0.5, 0.1
+            #pos_hint: {"x":0, "top":1}
+            pos: 90, 80
+
+
+        Button: # ROLL HISTORY BUTTON
+            text: "History"
+            font_size: 20
+            on_press: root._history() # bind history button = po wcisnieciu guzika wyswietli sie osobne okno z historia
+            size_hint: 0.3, 0.075
+            pos: 30, 13
+
+
+        Button: # SAVE CURRENT HISTORY TO TXT FILE
+            text: "Save"
+            font_size: 20
+            on_press: root._save_h() # bind save button = po wcisnieciu guzika zapisze sie jako txt i otworzy folder
+            on_release: Factory.SaveStatePopup().open()
+            size_hint: 0.3, 0.075
+            pos: 220, 13
+
+
+        Label: # RESULTS WINDOW
+            id: results
+            text: ""
+            font_size: 69
